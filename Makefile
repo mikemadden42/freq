@@ -1,6 +1,6 @@
 PROGRAMS = freq 
 
-CC = g++
+CC = c++
 CFLAGS=-Wall -O2 -std=c++11 -march=native
 LIBS=
 
