@@ -21,8 +21,7 @@ int main(int argc, char const *argv[]) {
     }
 
     while (text.get(c)) {
-        if (isspace(c) || ispunct(c) || isdigit(c))
-            continue;
+        if (isspace(c) || ispunct(c) || isdigit(c)) continue;
 
         freqmap[tolower(c)]++;
     }
