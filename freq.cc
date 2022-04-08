@@ -7,7 +7,7 @@
 
 int main(int argc, char const *argv[]) {
     std::ifstream text(argv[1]);
-    std::map<char, int> freqmap;
+    std::map<char, int> map;
     char c;
 
     if (argc == 1) {
@@ -16,17 +16,17 @@ int main(int argc, char const *argv[]) {
     }
 
     if (!text) {
-        std::cout << "Eror opening file: " << argv[1] << std::endl;
+        std::cout << "Error opening file: " << argv[1] << std::endl;
         exit(1);
     }
 
     while (text.get(c)) {
         if (isspace(c) || ispunct(c) || isdigit(c)) continue;
 
-        freqmap[tolower(c)]++;
+        map[tolower(c)]++;
     }
 
-    for (auto const &ent : freqmap) {
+    for (auto const &ent : map) {
         std::cout << ent.first << " " << ent.second << std::endl;
     }
 
