@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
     while (text.get(c)) {
         if (isspace(c) || ispunct(c) || isdigit(c)) continue;
 
-        map[tolower(c)]++;
+        map[toupper(c, std::locale())]++;
     }
 
     for (auto const &ent : map) {
