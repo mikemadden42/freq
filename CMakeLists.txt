@@ -22,11 +22,30 @@ add_test(NAME counts_ascii_letters_only
     -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/mixed.expected
     -P ${RUN_TEST})
 
-add_test(NAME no_args_prints_usage
+add_test(NAME no_args_reads_stdin
   COMMAND ${CMAKE_COMMAND}
     -DEXE=$<TARGET_FILE:freq>
+    -DINPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/mixed.txt
+    -DEXPECTED_RC=0
+    -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/mixed.expected
+    -P ${RUN_TEST})
+
+add_test(NAME dash_reads_stdin
+  COMMAND ${CMAKE_COMMAND}
+    -DEXE=$<TARGET_FILE:freq>
+    -DARGS=-
+    -DINPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/mixed.txt
+    -DEXPECTED_RC=0
+    -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/mixed.expected
+    -P ${RUN_TEST})
+
+add_test(NAME too_many_args_prints_usage
+  COMMAND ${CMAKE_COMMAND}
+    -DEXE=$<TARGET_FILE:freq>
+    -DARGS=a$<SEMICOLON>b
     -DEXPECTED_RC=1
-    -DEXPECTED_REGEX=^Usage:
+    -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.expected
+    -DEXPECTED_STDERR_REGEX=^Usage:
     -P ${RUN_TEST})
 
 add_test(NAME missing_file_reports_error
@@ -34,5 +53,6 @@ add_test(NAME missing_file_reports_error
     -DEXE=$<TARGET_FILE:freq>
     -DARGS=${CMAKE_CURRENT_SOURCE_DIR}/tests/does-not-exist.txt
     -DEXPECTED_RC=1
-    -DEXPECTED_REGEX=^Error\ opening\ file:
+    -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.expected
+    -DEXPECTED_STDERR_REGEX=^Error\ opening\ file:
     -P ${RUN_TEST})

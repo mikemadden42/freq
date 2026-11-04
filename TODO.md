@@ -19,15 +19,15 @@ Findings from a project review (2026-11-04).
 
 ## Smaller code improvements
 
-- [ ] Send usage and error messages to `std::cerr` instead of `stdout`.
-- [ ] Use `std::uint64_t` counts (an `int` overflows on inputs over ~2 GB);
+- [x] Send usage and error messages to `std::cerr` instead of `stdout`.
+- [x] Use `std::uint64_t` counts (an `int` overflows on inputs over ~2 GB);
       consider `std::array<std::uint64_t, 256>` instead of `std::map`.
 - [x] ~~Construct `std::locale()` once outside the loop.~~ No longer applies:
       `std::locale` was dropped in favour of `<cctype>` `std::toupper`.
-- [ ] Use `'\n'` instead of `std::endl`.
-- [ ] Replace `exit(1)` in `main` with `return 1`; drop the redundant
+- [x] Use `'\n'` instead of `std::endl`.
+- [x] Replace `exit(1)` in `main` with `return 1`; drop the redundant
       `text.close()`.
-- [ ] Read from stdin when no file is given.
+- [x] Read from stdin when no file is given.
 
 ## Build and CI
 
