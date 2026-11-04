@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 
 project(freq CXX)
 
-set (CMAKE_CXX_STANDARD 17)
-if (NOT MSVC)
-  set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
-endif()
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(freq freq.cc)
-target_link_libraries(freq ${CORELIBS})
+if (NOT MSVC)
+  target_compile_options(freq PRIVATE -Wall -Wextra -pedantic)
+endif()
 
 enable_testing()
 
