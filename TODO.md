@@ -34,12 +34,13 @@ Findings from a project review (2026-11-04).
 - [x] CI runs `ctest`, but no tests are defined (no `enable_testing()` /
       `add_test()`); on recent CMake `ctest` exits 1 with "No test configuration
       file found!". Add a test (fixture file + expected output) or remove the step.
-- [ ] Replace `set(CMAKE_CXX_FLAGS ...)` with
+- [x] Replace `set(CMAKE_CXX_FLAGS ...)` with
       `target_compile_options(freq PRIVATE -Wall -Wextra -pedantic)` and add
       `set(CMAKE_CXX_STANDARD_REQUIRED ON)`.
-- [ ] Remove `target_link_libraries(freq ${CORELIBS})` (`CORELIBS` is undefined).
-- [ ] Bump `actions/checkout@v3` to v4 or later.
-- [ ] Add clang-tidy / clang-format checks to CI, and possibly a sanitizer build.
+- [x] Remove `target_link_libraries(freq ${CORELIBS})` (`CORELIBS` is undefined).
+- [x] Bump `actions/checkout@v3` to v4 or later.
+- [x] Add a sanitizer (ASan/UBSan) build to CI.
+- [ ] Add clang-tidy / clang-format checks to CI.
 
 ## Makefile and repo
 
