@@ -53,3 +53,22 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest --output-on-failure
+
+  lint:
+    # Check formatting with clang-format and run clang-tidy on the sources.
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Install clang tools
+      run: sudo apt-get update && sudo apt-get install -y clang-format clang-tidy
+
+    - name: clang-format
+      run: clang-format --dry-run --Werror freq.cc
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+    - name: clang-tidy
+      run: clang-tidy -p ${{github.workspace}}/build freq.cc

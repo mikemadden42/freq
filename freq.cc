@@ -30,13 +30,17 @@ int main(int argc, char const *argv[]) {
 
     while (text->get(c)) {
         auto const uc = static_cast<unsigned char>(c);
-        if (!std::isalpha(uc)) continue;
+        if (std::isalpha(uc) == 0) {
+            continue;
+        }
 
         counts[static_cast<unsigned char>(std::toupper(uc))]++;
     }
 
     for (std::size_t i = 0; i < counts.size(); ++i) {
-        if (counts[i] == 0) continue;
+        if (counts[i] == 0) {
+            continue;
+        }
         std::cout << static_cast<char>(i) << ' ' << counts[i] << '\n';
     }
 
