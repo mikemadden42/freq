@@ -26,6 +26,7 @@
 *.exe
 *.out
 *.app
+/freq
 
 # cmake build directories
 build

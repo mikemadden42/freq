@@ -44,7 +44,7 @@ Findings from a project review (2026-11-04).
 
 ## Makefile and repo
 
-- [ ] Use `CXX`/`CXXFLAGS` instead of `CC`/`CFLAGS`.
-- [ ] Use `rm -f` in `clean` and add `.PHONY: all clean`.
-- [ ] Add the in-tree `freq` binary to `.gitignore`.
-- [ ] Expand the README with build instructions and a usage example.
+- [x] Use `CXX`/`CXXFLAGS` instead of `CC`/`CFLAGS`.
+- [x] Use `rm -f` in `clean` and add `.PHONY: all clean`.
+- [x] Add the in-tree `freq` binary to `.gitignore`.
+- [x] Expand the README with build instructions and a usage example.
