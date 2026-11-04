@@ -6,8 +6,10 @@
 #   EXPECTED_OUTPUT        file whose contents must match stdout exactly (optional)
 #   EXPECTED_STDERR_REGEX  regex stderr must match (optional)
 
+# Use an empty file rather than /dev/null, which doesn't exist on Windows.
 if (NOT DEFINED INPUT)
-  set(INPUT /dev/null)
+  set(INPUT ${CMAKE_CURRENT_BINARY_DIR}/empty-input)
+  file(WRITE ${INPUT} "")
 endif()
 
 execute_process(
@@ -17,12 +19,17 @@ execute_process(
   OUTPUT_VARIABLE out
   ERROR_VARIABLE err)
 
+# Windows writes CRLF line endings in text mode; compare with LF only.
+string(REPLACE "\r\n" "\n" out "${out}")
+string(REPLACE "\r\n" "\n" err "${err}")
+
 if (NOT rc STREQUAL EXPECTED_RC)
   message(FATAL_ERROR "exit code: expected ${EXPECTED_RC}, got ${rc}\n${out}${err}")
 endif()
 
 if (DEFINED EXPECTED_OUTPUT)
   file(READ ${EXPECTED_OUTPUT} expected)
+  string(REPLACE "\r\n" "\n" expected "${expected}")
   if (NOT out STREQUAL expected)
     message(FATAL_ERROR "output mismatch\n--- expected\n${expected}--- got\n${out}")
   endif()
