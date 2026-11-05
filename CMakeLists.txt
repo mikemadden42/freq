@@ -58,3 +58,12 @@ add_test(NAME missing_file_reports_error
     -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.expected
     -DEXPECTED_STDERR_REGEX=^Error\ opening\ file:
     -P ${RUN_TEST})
+
+add_test(NAME directory_reports_error
+  COMMAND ${CMAKE_COMMAND}
+    -DEXE=$<TARGET_FILE:freq>
+    -DARGS=${CMAKE_CURRENT_SOURCE_DIR}/tests
+    -DEXPECTED_RC=1
+    -DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.expected
+    "-DEXPECTED_STDERR_REGEX=^Error (opening file|reading input)"
+    -P ${RUN_TEST})
