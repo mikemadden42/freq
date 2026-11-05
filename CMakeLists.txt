@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(freq freq.cc)
-if (NOT MSVC)
+if (MSVC)
+  target_compile_options(freq PRIVATE /W4)
+else()
   target_compile_options(freq PRIVATE -Wall -Wextra -pedantic)
 endif()
 
